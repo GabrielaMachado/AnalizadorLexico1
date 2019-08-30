@@ -52,7 +52,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtTexto.setColumns(20);
         txtTexto.setFont(new java.awt.Font("Monospaced", 0, 24)); // NOI18N
         txtTexto.setRows(5);
-        txtTexto.setText(" ");
         jScrollPane1.setViewportView(txtTexto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

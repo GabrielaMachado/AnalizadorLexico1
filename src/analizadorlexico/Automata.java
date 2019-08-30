@@ -24,7 +24,7 @@ public class Automata {
     Lexema lex;
 
     public Character[] leer(String texto) {
-        String res = " " + texto;
+        String res = " " + texto + " ";
         int longitud = 0;
         Character ch[];
         res = res.toLowerCase();
