@@ -24,7 +24,7 @@ public class Automata {
     Lexema lex;
 
     public Character[] leer(String texto) {
-        String res = texto;
+        String res = " " + texto;
         int longitud = 0;
         Character ch[];
         res = res.toLowerCase();
@@ -56,6 +56,23 @@ public class Automata {
         out.verTipos();
     }
 
+    public String esEspacio(Character ch[], int pos) {
+
+        String pal = "";
+        if (ch[pos].equals(" ")) {
+            for (int i = pos; i < ch.length; i++) {
+                pal += ch[pos].toString();
+                if (ch[pos].equals(" ")) {
+                    return pal;
+                }
+                pos++;
+            }
+            return pal;
+        } else {
+            return pal;
+        }
+    }
+
     /**
      * ****************************************
      * Verificamos la Expresion para ver si es un digito con el metodo de la
@@ -63,28 +80,33 @@ public class Automata {
      */
     public Lexema esLiteralBooleana(Character ch[], int pos) {
 
-        palabra = isTrue.toCharArray();
-        String lexema = "";
+        if (pos > 0 && ch[pos - 1].toString().equals(" ")) {
 
-        for (int j = 0; j < palabra.length; j++) {
-            if (ch[pos].equals(palabra[j])) {
-                lexema += ch[pos].toString();
-                if (lexema.equals(isTrue)) {
-                    posActual = pos;
-                    if (ch[pos + 1].toString().equals(" ")) {
-                        pos++;
-                        return lex = new Lexema(pos - 1, "Literal Booleana", lexema);
-                    } else {
-                        return null;
+            palabra = isTrue.toCharArray();
+            String lexema = "";
+
+            for (int j = 0; j < palabra.length; j++) {
+                if (ch[pos].equals(palabra[j])) {
+                    lexema += ch[pos].toString();
+                    if (lexema.equals(isTrue)) {
+                        posActual = pos;
+                        if (ch[pos + 1].toString().equals(" ")) {
+                            pos++;
+                            return lex = new Lexema(pos - 1, "Literal Booleana", lexema);
+                        } else {
+                            return null;
+                        }
                     }
+                } else {
+                    return null;
                 }
-            } else {
-                return null;
+                pos++;
             }
-            pos++;
+        } else {
+            return null;
         }
-        Lexema out = new Lexema(pos, "Literal booleana", lexema);
-        out.verTipos();
+//        Lexema out = new Lexema(pos, "Literal booleana", lexema);
+//        out.verTipos();
         return null;
     }
 
@@ -117,15 +139,19 @@ public class Automata {
         String lexema = "";
         lexema += ch[pos].toString() + " ";
         System.out.println("ch : " + pos);
-        if (ch[pos].equals(" ")) {
-            while (ch[pos + 1].equals(" ")) {
-                pos++;
-                posActual = pos;
-            }
-            return lex = new Lexema(pos, "Identificadores", lexema);
-        } else {
-            return null;
-        }
+
+        //     if (!ch[pos].toString().equals(" ")) {            
+        //          while (!ch[pos + 1].equals(" ")) {
+        System.out.print("." + ch[pos] + ".");
+        pos++;
+        posActual = pos;
+        //          }
+
+        return lex = new Lexema(pos, "Identificadores", lexema);
+        //     } else {
+        //         System.out.println("Espacio");
+        //       return null;
+        // }
 
     }
 

@@ -18,6 +18,8 @@ public class AnalizadorLexico {
      * @param args the command line arguments
      */
     public static int posActual = 0;
+    public static String miniPalabra = "";
+    public static Character[] miniCadena;
     public static int posInicial = 0;
     public static ArrayList<Lexema> arrayLexema = new ArrayList<>();
     static Lexema lexema;
@@ -31,6 +33,8 @@ public class AnalizadorLexico {
 
     public static void verificarAutomatas(Character[] cadena) {
         while (cadena.length > posInicial) {
+         //   miniPalabra = prueba.esEspacio(cadena, posInicial);
+         //   miniCadena = prueba.leer(miniPalabra);
             lexema = (prueba.esLiteralBooleana(cadena, posInicial));
             if (lexema != null) {
                 posInicial = posActual + 1;
@@ -43,6 +47,7 @@ public class AnalizadorLexico {
                     arrayLexema.add(lexema);
                 } else {
                     System.out.println("ERROR");
+                    verificarAutomatas(cadena);
                 }
             }
         }
