@@ -27,7 +27,7 @@ public class Automata {
         String res = texto;
         int longitud = 0;
         Character ch[];
-        res = res.replace(" ", "").toLowerCase();
+        res = res.toLowerCase();
         longitud = res.length();
         ch = new Character[longitud];
         System.out.println(res);
@@ -71,7 +71,12 @@ public class Automata {
                 lexema += ch[pos].toString();
                 if (lexema.equals(isTrue)) {
                     posActual = pos;
-                    return lex = new Lexema(pos, "Literal Booleana", lexema);
+                    if (ch[pos + 1].toString().equals(" ")) {
+                        pos++;
+                        return lex = new Lexema(pos - 1, "Literal Booleana", lexema);
+                    } else {
+                        return null;
+                    }
                 }
             } else {
                 return null;
@@ -110,16 +115,18 @@ public class Automata {
      */
     public Lexema esIdentificador(Character ch[], int pos) {
         String lexema = "";
-        //       for (int i = 0; i < ch.length; i++) {
-        //      if (au.isJavaIdentifierStart(ch[pos])) {
         lexema += ch[pos].toString() + " ";
-        pos++;
-        posActual = pos;
-        return lex = new Lexema(pos, "Identificadores", lexema);
-        //    } else {
-//            Lexema out = new Lexema(Id, "Identificadores", lexema);
-//            out.verTipos();
-        //      return null;
+        System.out.println("ch : " + pos);
+        if (ch[pos].equals(" ")) {
+            while (ch[pos + 1].equals(" ")) {
+                pos++;
+                posActual = pos;
+            }
+            return lex = new Lexema(pos, "Identificadores", lexema);
+        } else {
+            return null;
+        }
+
     }
 
 //        }
