@@ -80,6 +80,9 @@ public class Automata {
      */
     public Lexema esLiteralBooleana(Character ch[], int pos) {
 
+        int posIn = pos;
+        int posIn2 = pos;
+
         if (pos > 0 && ch[pos - 1].toString().equals(" ")) {
 
             palabra = isTrue.toCharArray();
@@ -92,21 +95,39 @@ public class Automata {
                         posActual = pos;
                         if (ch[pos + 1].toString().equals(" ")) {
                             pos++;
-                            return lex = new Lexema(pos - 1, "Literal Booleana", lexema);
+                            return lex = new Lexema(posIn , "Literal Booleana", lexema);
                         } else {
                             return null;
                         }
                     }
                 } else {
-                    return null;
+                    palabra = isFalse.toCharArray();
+                    lexema = "";
+
+                    for (int i = 0; i < palabra.length; i++) {
+                        if (ch[posIn].equals(palabra[i])) {
+                            lexema += ch[posIn].toString();
+                            if (lexema.equals(isFalse)) {
+                                posActual = posIn;
+                                if (ch[posIn + 1].toString().equals(" ")) {
+                                    posIn++;
+                                    return lex = new Lexema(pos, "Literal Booleana", lexema);
+                                } else {
+                                    return null;
+                                }
+                            }
+                        } else {
+                            return null;
+                        }
+                        posIn++;
+
+                    }
                 }
                 pos++;
             }
         } else {
             return null;
         }
-//        Lexema out = new Lexema(pos, "Literal booleana", lexema);
-//        out.verTipos();
         return null;
     }
 
@@ -147,7 +168,7 @@ public class Automata {
         posActual = pos;
         //          }
 
-        return lex = new Lexema(pos, "Identificadores", lexema);
+        return lex = new Lexema(pos-1, "Identificadores", lexema);
         //     } else {
         //         System.out.println("Espacio");
         //       return null;
