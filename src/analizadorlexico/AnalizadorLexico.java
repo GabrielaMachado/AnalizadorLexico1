@@ -58,13 +58,34 @@ public class AnalizadorLexico {
                             arrayLexema.add(lexema);
                             verificarAutomatas(cadena);
                         } else {
-                            lexema = prueba.esIdentificador(cadena, posInicial);
+                            lexema = (prueba.esTipoDato(cadena, posActual));
                             if (lexema != null) {
-                                posInicial = posActual;
+                                posInicial = posActual + 1;
                                 arrayLexema.add(lexema);
-                            } else {
-                                System.out.println("ERROR");
                                 verificarAutomatas(cadena);
+                            } else {
+                                lexema = (prueba.esEntradaDato(cadena, posActual));
+                                if (lexema != null) {
+                                    posInicial = posActual + 1;
+                                    arrayLexema.add(lexema);
+                                    verificarAutomatas(cadena);
+                                } else {
+                                    lexema = (prueba.esOperadorRacional(cadena, posActual));
+                                    if (lexema != null) {
+                                        posInicial = posActual + 1;
+                                        arrayLexema.add(lexema);
+                                        verificarAutomatas(cadena);
+                                    } else {
+                                        lexema = prueba.esIdentificador(cadena, posInicial);
+                                        if (lexema != null) {
+                                            posInicial = posActual;
+                                            arrayLexema.add(lexema);
+                                        } else {
+                                            System.out.println("ERROR");
+                                            verificarAutomatas(cadena);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
