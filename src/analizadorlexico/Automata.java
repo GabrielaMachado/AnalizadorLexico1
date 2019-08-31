@@ -743,6 +743,7 @@ public class Automata {
         }
         return null;
     }
+
     /**
      * ****************************************
      * Verificamos la Expresion para ver si es un operador evaluandolo contra
@@ -770,22 +771,30 @@ public class Automata {
      */
     public Lexema esIdentificador(Character ch[], int pos) {
         String lexema = "";
-        lexema += ch[pos].toString() + " ";
-        System.out.println("ch : " + pos);
+        lexema = ch[pos].toString();
+        if (ch[pos].toString().equals(" ")) {
+            pos++;
+            posActual = pos;
+            return null;
+        } else {
 
-        //     if (!ch[pos].toString().equals(" ")) {            
+            pos++;
+            posActual = pos;
+            return lex = new Lexema(pos - 1, "Identificadores", lexema);
+        }
+
+        //     if (!) {            
         //          while (!ch[pos + 1].equals(" ")) {
-        System.out.print("." + ch[pos] + ".");
-        pos++;
-        posActual = pos;
-        //          }
-
-        return lex = new Lexema(pos - 1, "Identificadores", lexema);
-        //     } else {
+//        System.out.print("." + ch[pos] + ".");
+//        pos++;
+//        posActual = pos;
+//        //          }
+//
+//        return lex = new Lexema(pos - 1, "Identificadores", lexema);
+//        //     } else {
         //         System.out.println("Espacio");
         //       return null;
         // }
-
     }
 
 //        }

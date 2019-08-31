@@ -40,37 +40,37 @@ public class AnalizadorLexico {
                 arrayLexema.add(lexema);
                 verificarAutomatas(cadena);
             } else {
-                lexema = (prueba.esEstructuraDeControl(cadena, posActual));
+                lexema = (prueba.esEstructuraDeControl(cadena, posInicial));
                 if (lexema != null) {
                     posInicial = posActual + 1;
                     arrayLexema.add(lexema);
                     verificarAutomatas(cadena);
                 } else {
-                    lexema = (prueba.esExcepcion(cadena, posActual));
+                    lexema = (prueba.esExcepcion(cadena, posInicial));
                     if (lexema != null) {
                         posInicial = posActual + 1;
                         arrayLexema.add(lexema);
                         verificarAutomatas(cadena);
                     } else {
-                        lexema = (prueba.esSalidaDato(cadena, posActual));
+                        lexema = (prueba.esSalidaDato(cadena, posInicial));
                         if (lexema != null) {
                             posInicial = posActual + 1;
                             arrayLexema.add(lexema);
                             verificarAutomatas(cadena);
                         } else {
-                            lexema = (prueba.esTipoDato(cadena, posActual));
+                            lexema = (prueba.esTipoDato(cadena, posInicial));
                             if (lexema != null) {
                                 posInicial = posActual + 1;
                                 arrayLexema.add(lexema);
                                 verificarAutomatas(cadena);
                             } else {
-                                lexema = (prueba.esEntradaDato(cadena, posActual));
+                                lexema = (prueba.esEntradaDato(cadena, posInicial));
                                 if (lexema != null) {
                                     posInicial = posActual + 1;
                                     arrayLexema.add(lexema);
                                     verificarAutomatas(cadena);
                                 } else {
-                                    lexema = (prueba.esOperadorRacional(cadena, posActual));
+                                    lexema = (prueba.esOperadorRacional(cadena, posInicial));
                                     if (lexema != null) {
                                         posInicial = posActual + 1;
                                         arrayLexema.add(lexema);
@@ -82,6 +82,7 @@ public class AnalizadorLexico {
                                             arrayLexema.add(lexema);
                                         } else {
                                             System.out.println("ERROR");
+                                            posInicial = posActual;
                                             verificarAutomatas(cadena);
                                         }
                                     }
