@@ -23,31 +23,51 @@ public class AnalizadorLexico {
     public static int posInicial = 0;
     public static ArrayList<Lexema> arrayLexema = new ArrayList<>();
     static Lexema lexema;
-    
 
     public static void main(String[] args) {
         FrmPrincipal frm = new FrmPrincipal();
         frm.setVisible(true);
-        
+
     }
 
     public static void verificarAutomatas(Character[] cadena) {
         while (cadena.length > posInicial) {
-         //   miniPalabra = prueba.esEspacio(cadena, posInicial);
-         //   miniCadena = prueba.leer(miniPalabra);
+            //   miniPalabra = prueba.esEspacio(cadena, posInicial);
+            //   miniCadena = prueba.leer(miniPalabra);
             lexema = (prueba.esLiteralBooleana(cadena, posInicial));
             if (lexema != null) {
                 posInicial = posActual + 1;
                 arrayLexema.add(lexema);
                 verificarAutomatas(cadena);
             } else {
-                lexema = prueba.esIdentificador(cadena, posInicial);
+                lexema = (prueba.esEstructuraDeControl(cadena, posActual));
                 if (lexema != null) {
-                    posInicial = posActual;
+                    posInicial = posActual + 1;
                     arrayLexema.add(lexema);
-                } else {
-                    System.out.println("ERROR");
                     verificarAutomatas(cadena);
+                } else {
+                    lexema = (prueba.esExcepcion(cadena, posActual));
+                    if (lexema != null) {
+                        posInicial = posActual + 1;
+                        arrayLexema.add(lexema);
+                        verificarAutomatas(cadena);
+                    } else {
+                        lexema = (prueba.esSalidaDato(cadena, posActual));
+                        if (lexema != null) {
+                            posInicial = posActual + 1;
+                            arrayLexema.add(lexema);
+                            verificarAutomatas(cadena);
+                        } else {
+                            lexema = prueba.esIdentificador(cadena, posInicial);
+                            if (lexema != null) {
+                                posInicial = posActual;
+                                arrayLexema.add(lexema);
+                            } else {
+                                System.out.println("ERROR");
+                                verificarAutomatas(cadena);
+                            }
+                        }
+                    }
                 }
             }
         }
