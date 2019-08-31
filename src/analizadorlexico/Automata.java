@@ -33,6 +33,20 @@ public class Automata {
     private String isFor = "for";
     private String isIf = "if";
     private String isDo = "do";
+    private String isBoolean = "boolean";
+    private String isInteger = "integer";
+    private String isDouble = "double";
+    private String isString = "string";
+    private String isStyle = "style";
+    private String isFigure = "figure";
+    private String isColor = "color";
+    private String isChar = "char";
+    private String isCanvas = "canvas";
+    private String isVoid = "void";
+    private String isNull = "null";
+    private String isNew = "new";
+    private String isAnd = "and";
+    private String isOr = "or";
     Lexema lex;
 
     public Character[] leer(String texto) {
@@ -417,6 +431,318 @@ public class Automata {
         return null;
     }
 
+    public Lexema esTipoDato(Character ch[], int pos) {
+
+        int posIn = pos;
+        int posDouble = pos;
+        int posString = pos;
+        int posStyle = pos;
+        int posFigure = pos;
+        int posColor = pos;
+        int posChar = pos;
+
+        if (pos > 0 && ch[pos - 1].toString().equals(" ")) {
+
+            palabra = isBoolean.toCharArray();
+            String lexema = "";
+
+            for (int j = 0; j < palabra.length; j++) {
+                if (ch[pos].equals(palabra[j])) {
+                    lexema += ch[pos].toString();
+                    if (lexema.equals(isBoolean)) {
+                        posActual = pos;
+                        if (ch[pos + 1].toString().equals(" ")) {
+                            pos++;
+                            return lex = new Lexema(posIn, "Tipo de dato", lexema);
+                        } else {
+                            return null;
+                        }
+                    }
+                } else {
+                    palabra = isInteger.toCharArray();
+                    lexema = "";
+
+                    for (int i = 0; i < palabra.length; i++) {
+                        if (ch[posIn].equals(palabra[i])) {
+                            lexema += ch[posIn].toString();
+                            if (lexema.equals(isInteger)) {
+                                posActual = posIn;
+                                if (ch[posIn + 1].toString().equals(" ")) {
+                                    posIn++;
+                                    return lex = new Lexema(pos, "Tipo de dato", lexema);
+                                } else {
+                                    return null;
+                                }
+                            }
+                        } else {
+                            palabra = isDouble.toCharArray();
+                            lexema = "";
+
+                            for (int d = 0; d < palabra.length; d++) {
+                                if (ch[posDouble].equals(palabra[d])) {
+                                    lexema += ch[posDouble].toString();
+                                    if (lexema.equals(isDouble)) {
+                                        posActual = posDouble;
+                                        if (ch[posDouble + 1].toString().equals(" ")) {
+                                            posDouble++;
+                                            return lex = new Lexema(pos, "Tipo de dato", lexema);
+                                        } else {
+                                            return null;
+                                        }
+                                    }
+                                } else {
+                                    palabra = isString.toCharArray();
+                                    lexema = "";
+
+                                    for (int s = 0; s < palabra.length; s++) {
+                                        if (ch[posString].equals(palabra[s])) {
+                                            lexema += ch[posString].toString();
+                                            if (lexema.equals(isString)) {
+                                                posActual = posString;
+                                                if (ch[posString + 1].toString().equals(" ")) {
+                                                    posString++;
+                                                    return lex = new Lexema(pos, "Tipo de dato", lexema);
+                                                } else {
+                                                    return null;
+                                                }
+                                            }
+                                        } else {
+                                            palabra = isStyle.toCharArray();
+                                            lexema = "";
+
+                                            for (int o = 0; o < palabra.length; o++) {
+                                                if (ch[posStyle].equals(palabra[o])) {
+                                                    lexema += ch[posStyle].toString();
+                                                    if (lexema.equals(isStyle)) {
+                                                        posActual = posStyle;
+                                                        if (ch[posStyle + 1].toString().equals(" ")) {
+                                                            posStyle++;
+                                                            return lex = new Lexema(pos, "Tipo de dato", lexema);
+                                                        } else {
+                                                            return null;
+                                                        }
+                                                    }
+                                                } else {
+                                                    palabra = isFigure.toCharArray();
+                                                    lexema = "";
+
+                                                    for (int f = 0; f < palabra.length; f++) {
+                                                        if (ch[posFigure].equals(palabra[f])) {
+                                                            lexema += ch[posFigure].toString();
+                                                            if (lexema.equals(isFigure)) {
+                                                                posActual = posFigure;
+                                                                if (ch[posFigure + 1].toString().equals(" ")) {
+                                                                    posFigure++;
+                                                                    return lex = new Lexema(pos, "Tipo de dato", lexema);
+                                                                } else {
+                                                                    return null;
+                                                                }
+                                                            }
+                                                        } else {
+                                                            palabra = isColor.toCharArray();
+                                                            lexema = "";
+
+                                                            for (int c = 0; c < palabra.length; c++) {
+                                                                if (ch[posColor].equals(palabra[c])) {
+                                                                    lexema += ch[posColor].toString();
+                                                                    if (lexema.equals(isColor)) {
+                                                                        posActual = posColor;
+                                                                        if (ch[posColor + 1].toString().equals(" ")) {
+                                                                            posColor++;
+                                                                            return lex = new Lexema(pos, "Tipo de dato", lexema);
+                                                                        } else {
+                                                                            return null;
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    palabra = isChar.toCharArray();
+                                                                    lexema = "";
+
+                                                                    for (int e = 0; e < palabra.length; e++) {
+                                                                        if (ch[posChar].equals(palabra[e])) {
+                                                                            lexema += ch[posChar].toString();
+                                                                            if (lexema.equals(isChar)) {
+                                                                                posActual = posChar;
+                                                                                if (ch[posChar + 1].toString().equals(" ")) {
+                                                                                    posChar++;
+                                                                                    return lex = new Lexema(pos, "Tipo de dato", lexema);
+                                                                                } else {
+                                                                                    return null;
+                                                                                }
+                                                                            }
+                                                                        } else {
+                                                                            return null;
+                                                                        }
+                                                                        posChar++;
+                                                                    }
+                                                                }
+                                                                posColor++;
+                                                            }
+                                                        }
+                                                        posFigure++;
+                                                    }
+                                                }
+                                                posStyle++;
+                                            }
+                                        }
+                                        posString++;
+                                    }
+                                }
+                                posDouble++;
+                            }
+                        }
+                        posIn++;
+                    }
+                }
+                pos++;
+            }
+        } else {
+            return null;
+        }
+        return null;
+    }
+
+    public Lexema esEntradaDato(Character ch[], int pos) {
+
+        int posVoid = pos;
+        int posNull = pos;
+        int posNew = pos;
+
+        if (pos > 0 && ch[pos - 1].toString().equals(" ")) {
+
+            palabra = isCanvas.toCharArray();
+            String lexema = "";
+
+            for (int j = 0; j < palabra.length; j++) {
+                if (ch[pos].equals(palabra[j])) {
+                    lexema += ch[pos].toString();
+                    if (lexema.equals(isCanvas)) {
+                        posActual = pos;
+                        if (ch[pos + 1].toString().equals(" ")) {
+                            pos++;
+                            return lex = new Lexema(posVoid, "Entrada de dato", lexema);
+                        } else {
+                            return null;
+                        }
+                    }
+                } else {
+                    palabra = isVoid.toCharArray();
+                    lexema = "";
+
+                    for (int v = 0; v < palabra.length; v++) {
+                        if (ch[posVoid].equals(palabra[v])) {
+                            lexema += ch[posVoid].toString();
+                            if (lexema.equals(isVoid)) {
+                                posActual = posVoid;
+                                if (ch[posVoid + 1].toString().equals(" ")) {
+                                    posVoid++;
+                                    return lex = new Lexema(pos, "Entrada de dato", lexema);
+                                } else {
+                                    return null;
+                                }
+                            }
+                        } else {
+                            palabra = isNull.toCharArray();
+                            lexema = "";
+
+                            for (int n = 0; n < palabra.length; n++) {
+                                if (ch[posNull].equals(palabra[n])) {
+                                    lexema += ch[posNull].toString();
+                                    if (lexema.equals(isNull)) {
+                                        posActual = posNull;
+                                        if (ch[posNull + 1].toString().equals(" ")) {
+                                            posNull++;
+                                            return lex = new Lexema(pos, "entrada de dato", lexema);
+                                        } else {
+                                            return null;
+                                        }
+                                    }
+                                } else {
+                                    palabra = isNew.toCharArray();
+                                    lexema = "";
+
+                                    for (int m = 0; m < palabra.length; m++) {
+                                        if (ch[posNew].equals(palabra[m])) {
+                                            lexema += ch[posNew].toString();
+                                            if (lexema.equals(isNew)) {
+                                                posActual = posNew;
+                                                if (ch[posNew + 1].toString().equals(" ")) {
+                                                    posNew++;
+                                                    return lex = new Lexema(pos, "Entrada de dato", lexema);
+                                                } else {
+                                                    return null;
+                                                }
+                                            }
+                                        } else {
+                                            return null;
+                                        }
+                                        posNew++;
+                                    }
+                                }
+                                posNull++;
+                            }
+                        }
+                        posVoid++;
+                    }
+                }
+                pos++;
+            }
+        } else {
+            return null;
+        }
+        return null;
+    }
+
+    public Lexema esOperadorRacional(Character ch[], int pos) {
+
+        int posIn = pos;
+
+        if (pos > 0 && ch[pos - 1].toString().equals(" ")) {
+
+            palabra = isAnd.toCharArray();
+            String lexema = "";
+
+            for (int j = 0; j < palabra.length; j++) {
+                if (ch[pos].equals(palabra[j])) {
+                    lexema += ch[pos].toString();
+                    if (lexema.equals(isAnd)) {
+                        posActual = pos;
+                        if (ch[pos + 1].toString().equals(" ")) {
+                            pos++;
+                            return lex = new Lexema(posIn, "Operador racional", lexema);
+                        } else {
+                            return null;
+                        }
+                    }
+                } else {
+                    palabra = isOr.toCharArray();
+                    lexema = "";
+
+                    for (int i = 0; i < palabra.length; i++) {
+                        if (ch[posIn].equals(palabra[i])) {
+                            lexema += ch[posIn].toString();
+                            if (lexema.equals(isOr)) {
+                                posActual = posIn;
+                                if (ch[posIn + 1].toString().equals(" ")) {
+                                    posIn++;
+                                    return lex = new Lexema(pos, "Operador racional", lexema);
+                                } else {
+                                    return null;
+                                }
+                            }
+                        } else {
+                            return null;
+                        }
+                        posIn++;
+                    }
+                }
+                pos++;
+            }
+        } else {
+            return null;
+        }
+        return null;
+    }
     /**
      * ****************************************
      * Verificamos la Expresion para ver si es un operador evaluandolo contra
